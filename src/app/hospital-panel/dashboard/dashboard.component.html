@@ -1,0 +1,47 @@
+<div class="card profile-card my-4">
+  <div class="card-header bg-primary">
+    <div class="font-size-17">
+      Confirma Programarile
+    </div>
+  </div>
+  <div class="card-body px-0">
+    <div *ngIf="appointments && appointments.length > 0">
+      <!--<table class="table table-striped no-footer">-->
+        <!--<thead>-->
+        <!--<tr>-->
+          <!--<th>Nume</th>-->
+          <!--<th>Telefon</th>-->
+          <!--<th>Grupa</th>-->
+          <!--<th>Data</th>-->
+          <!--<th></th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr *ngFor="let appointment of appCollection; let i = index">-->
+          <!--<td>{{appointment.firstName}} {{appointment.lastName}}</td>-->
+          <!--<td>{{appointment?.phone}}</td>-->
+          <!--<td>{{appointment?.blood_type}} {{appointment?.rh}}</td>-->
+          <!--<td>{{appointment?.appointment_date | date: 'medium'}}</td>-->
+          <!--<td><button (click)="onViewAppointment(appointment); open(content)" class="btn btn-sm btn-success">Confirma</button></td>-->
+        <!--</tr>-->
+        <!--</tbody>-->
+      <!--</table>-->
+      <!--&lt;!&ndash;Pagination&ndash;&gt;-->
+      <!--<div *ngIf="appCollection.length > pageSize" class="d-flex justify-content-between p-2">-->
+        <!--<ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">-->
+        <!--</ngb-pagination>-->
+
+        <!--<select class="custom-select" style="width: auto" [(ngModel)]="pageSize">-->
+          <!--<option [ngValue]="10" selected>10 rezultate</option>-->
+          <!--<option [ngValue]="25">25 rezultate</option>-->
+          <!--<option [ngValue]="50">50 rezultate</option>-->
+        <!--</select>-->
+      <!--</div>-->
+      <app-appointment-table [dataList]="appointments" actions="confirmation"></app-appointment-table>
+
+    </div>
+
+  </div>
+  <div *ngIf="appointments && appointments.length === 0" class="p-2">Nu aveti nici o programare de confirmat</div>
+</div>
+

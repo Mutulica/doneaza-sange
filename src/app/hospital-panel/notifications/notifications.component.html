@@ -1,0 +1,187 @@
+<ngb-tabset>
+  <ngb-tab title="Lista notificari">
+    <ng-template ngbTabContent>
+
+      <div class="card profile-card my-4">
+        <div class="card-header bg-primary">
+          <div class="font-size-17">
+            Lista notificari
+          </div>
+        </div>
+        <div class="card-body px-0">
+          <div *ngIf="notificationsList">
+            <form class="col-md-4">
+              <div class="form-group form-inline">
+                <label>Cautare: </label>
+                <input class="form-control ml-2" type="text" (keyup)="onSearchBox()" [formControl]="filter"/>
+              </div>
+            </form>
+            <table class="table table-responsive-sm table-hover no-footer">
+              <thead>
+              <tr>
+                <th (click)="onSortTable('title')">Titlu</th>
+                <th (click)="onSortTable('blood_type')">Grupa</th>
+                <th (click)="onSortTable('rh')">RH</th>
+                <th>Data</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let notification of notificationsClone | paginate: { itemsPerPage: itemsPerPage, currentPage: curentPage }">
+                <td class="align-middle">{{notification?.title}}</td>
+                <td class="align-middle">{{notification?.blood_type}}</td>
+                <td class="align-middle">{{notification?.rh}}</td>
+                <td class="align-middle">{{notification?.date_created | date: 'medium'}}</td>
+                <td>
+                  <button (click)="open(notification)" class="btn btn-link text-primary mr-2">
+                    <i class="fa fa-pencil-square-o"></i>
+                  </button>
+                  <button type="button"
+                    class="btn btn-link text-danger border-0"
+                    (click)="openDialog(dialog ,notification)">
+                    <i class="fa fa-trash-o"></i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <pagination-controls (pageChange)="curentPage = $event"
+                               previousLabel="Inapoi"
+                               nextLabel="Urmatoarea">
+          </pagination-controls>
+        </div>
+      </div>
+
+
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab>
+    <ng-template ngbTabTitle>Trimite Notificare</ng-template>
+    <ng-template ngbTabContent>
+
+      <app-notification-send></app-notification-send>
+
+    </ng-template>
+  </ngb-tab>
+
+</ngb-tabset>
+
+<!-- Notification view modal -->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalii notificare</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <!-- Notification Details -->
+    <div *ngIf="!isEditing">
+      <div>
+        <strong>Creat in data de</strong>
+        <p>{{selectedNotification.date_created | date: 'medium' : 'UTC'}}</p>
+      </div>
+      <div>
+        <strong>Titlu</strong>
+        <p>{{selectedNotification.title}}</p>
+      </div>
+      <div>
+        <strong>Subiect</strong>
+        <p>{{selectedNotification.subject}}</p>
+      </div>
+      <div>
+        <strong>Mesaj</strong>
+        <p>{{selectedNotification.body}}</p>
+      </div>
+      <div>
+        <strong>Grupa de sange</strong>
+        <p>{{selectedNotification.blood_type}}</p>
+      </div>
+      <div>
+        <strong>RH</strong>
+        <p>{{selectedNotification.rh}}</p>
+      </div>
+    </div>
+    <!-- / Notification Details -->
+
+    <!-- Edit Form -->
+    <form *ngIf="isEditing" [formGroup]="editForm">
+      <div class="form-group">
+        <label>Grupda de sange</label>
+        <select formControlName="blood_type" class="form-control">
+          <option value="A0">A0</option>
+          <option value="A2">A2</option>
+          <option value="AB4">AB4</option>
+          <option value="B3">B3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>RH</label>
+        <select formControlName="rh" class="form-control">
+          <option value="negativ">Negativ</option>
+          <option value="pozitiv">Pozitiv</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Titlu</label>
+        <input type="text" class="form-control" formControlName="title">
+      </div>
+      <div class="form-group">
+        <label>Subiect</label>
+        <input type="text" class="form-control" formControlName="subject">
+      </div>
+      <div class="form-group">
+        <label>Mesaj</label>
+        <textarea formControlName="body" class="form-control" rows="5"></textarea>
+      </div>
+    </form>
+    <!-- / Edit Form-->
+
+    <ngb-alert *ngIf="isError" [dismissible]="false" type="error">
+      A intervenit o eroare, va rugam incercati din nou.
+    </ngb-alert>
+  </div>
+
+  <div class="modal-footer">
+    <button *ngIf="!isEditing" (click)="closeModal()" class="btn btn-outline-secondary float-left">Inchide</button>
+    <button *ngIf="isEditing" (click)="toggleEditMode()" class="btn btn-outline-secondary float-left">Inapoi</button>
+    <button *ngIf="!isEditing" (click)="toggleEditMode()"  type="button" class="btn btn-primary">Editeaza</button>
+    <button
+      *ngIf="isEditing"
+      [disabled]="editForm.pristine || editForm.invalid"
+      (click)="onUpdateNotification()"
+      type="button"
+      class="btn btn-primary">
+
+      Salveaza
+    </button>
+  </div>
+</ng-template>
+<!-- / Notification view modal -->
+
+<!-- Confirmation Modal -->
+<!-- Notification view modal -->
+<ng-template #dialog let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title text-danger">Sterge notificarea</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Sunteti pe cale sa stergeti o notificare.</p>
+    <p class="text-danger"><strong>Atentie! Aceasta actiune este ireversibila</strong></p>
+    <p>Doriti sa continuati?</p>
+  </div>
+
+  <div class="modal-footer">
+   <button (click)="modal.close()" class="btn btn-outline-dark">Inapoi</button>
+   <button (click)="onDeleteNotification()" class="btn btn-danger">Sterge</button>
+  </div>
+</ng-template>
+<!-- / Confirmation Modal -->
+
+

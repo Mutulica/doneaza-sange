@@ -1,0 +1,40 @@
+<div class="card profile-card my-4">
+  <div class="card-header bg-primary">
+    <div class="font-size-17 text-white">Trimite Notificare</div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="notificationForm">
+      <div class="form-group">
+        <input formControlName="title" type="text" class="form-control" placeholder="Titlu">
+      </div>
+      <div class="form-group">
+        <input formControlName="subject" type="text" class="form-control" placeholder="Subiect">
+      </div>
+      <div class="form-group">
+        <select formControlName="blood_type" class="form-control">
+          <option value="A0">AO</option>
+          <option value="A2">A2</option>
+          <option value="AB4">AB4</option>
+          <option value="B3">B3</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <select formControlName="rh" class="form-control">
+          <option value="negativ">Negativ</option>
+          <option value="pozitiv">Pozitiv</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <textarea rows="5" formControlName="body" class="form-control" placeholder="Mesaj"></textarea>
+      </div>
+      <div>
+        <ngb-alert *ngIf="status.success" type="success" (close)="status.success = false">Notificarea a fost trimisa</ngb-alert>
+        <ngb-alert *ngIf="status.error" type="danger" (close)="status.error = false">Notificarea nu a fost trimisa. Incercati din nou.</ngb-alert>
+      </div>
+    </form>
+  </div>
+  <div class="card-footer bg-white">
+    <button [disabled]="notificationForm.invalid" (click)="onSendNotification()" type="button" class="btn btn-primary bg-primary">Trimite notificarea</button>
+  </div>
+</div>
+

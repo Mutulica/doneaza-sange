@@ -1,0 +1,117 @@
+<!--<div class="card profile-card my-4">-->
+  <!--<div class="card-header bg-primary">-->
+    <!--<div class="font-size-17">Centre de donare</div>-->
+  <!--</div>-->
+  <!--<div class="card-body">-->
+    <!--<div class="row">-->
+      <!--<div class="col-md-6">-->
+        <!--<div class="form-group">-->
+          <!--<label>Adaugati la favorite</label>-->
+          <!--<select (change)="onHospitalSelect($event)" class="form-control">-->
+            <!--<option disabled selected>Selectati Centru de donare</option>-->
+            <!--<option-->
+              <!--*ngFor="let hospital of hospitals"-->
+              <!--[selected]="hospital.uid === selectedHospitalId"-->
+              <!--[value]="hospital.uid"-->
+            <!--&gt;{{hospital.medical_center_name}}</option>-->
+          <!--</select>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+          <!--<button-->
+            <!--[disabled]="!selectedHospitalId || canSubscribe"-->
+            <!--(click)="userSubscribeToHospital()"-->
+            <!--class="btn btn-primary btn-block">Adauga in lista</button>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="col-md-6">-->
+        <!--<div class="list-group">-->
+          <!--<div class="list-group-item list-group-item-action active">-->
+            <!--Lista favorite-->
+          <!--</div>-->
+          <!--<div *ngFor="let favorite of favoriteHospitals; let i = index" type="button" class="list-group-item list-group-item-action">-->
+            <!--{{favorite.medical_center_name}},-->
+            <!--{{favorite.county}},-->
+            <!--{{favorite.city}}-->
+            <!--<div class="float-right">-->
+              <!--<button (click)="userUnsubscribeFromHospital(favorite.uid, i)" class="btn btn-sm btn-outline-danger">Elimina</button>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+
+<div class="card profile-card my-4">
+  <div class="card-header bg-primary">
+    <div class="font-size-17">Centre de donare</div>
+  </div>
+  <div class="card-body">
+    <ngb-tabset>
+      <ngb-tab title="Lista">
+        <ng-template ngbTabContent>
+
+          <div class="list-group mt-4" style="max-width: 400px">
+            <div *ngFor="let hospital of hospitals; let i = index;" class="list-group-item list-group-item-action flex-column">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>{{hospital.medical_center_name}}</strong>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                      <i class="fa fa-map-marker"></i>
+                      {{hospital.address}}
+                    </p>
+                    <p class="mb-0">
+                      <i class="fa fa-phone"></i>
+                      {{hospital.phone}}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  (click)="onAddRemoveSubscription(hospital.uid, i)"
+                  class="btn btn-link text-danger clickable">
+                  <i *ngIf="onCheckSubscription(hospital.uid)" class="fa fa-heart"></i>
+                  <i *ngIf="!onCheckSubscription(hospital.uid)" class="fa fa-heart-o"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Favorite">
+        <ng-template ngbTabContent>
+
+          <div *ngIf="favoriteHospitals" class="list-group mt-4" style="max-width: 400px">
+            <div *ngFor="let favorite of favoriteHospitals" class="list-group-item list-group-item-action flex-column">
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                  <strong>{{favorite.medical_center_name}}</strong>
+                  <div class="ml-3">
+                    <p class="mb-1">
+                      <i class="fa fa-map-marker"></i>
+                      {{favorite.address}}
+                    </p>
+                    <p class="mb-0">
+                      <i class="fa fa-phone"></i>
+                      {{favorite.phone}}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  (click)="onAddRemoveSubscription(favorite.uid)"
+                  class="btn btn-link text-danger clickable">
+                  <i class="fa fa-heart"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <p *ngIf="!favoriteHospitals.length">Lista este goala</p>
+
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+
+  </div>
+</div>

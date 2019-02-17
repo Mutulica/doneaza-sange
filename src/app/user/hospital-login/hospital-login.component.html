@@ -1,0 +1,17 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-md-5 mx-auto my-5">
+      <form [formGroup]="loginForm" class="form-signin">
+        <div class="form-group">
+          <input formControlName="email" type="text" placeholder="Email" class="form-control">
+        </div>
+        <div class="form-group">
+          <input formControlName="password" type="password" placeholder="Password" class="form-control">
+        </div>
+        <div class="form-group mb-3">
+          <button (click)="onEmailAndPassLogin()" type="button" class="btn btn-primary">Autentificare</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

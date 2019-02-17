@@ -1,0 +1,26 @@
+<div *ngIf="user">
+  <div class="col-md-12">
+    <div *ngIf="user.next_appointment" class="card">
+      <div class="card-header bg-info">
+        <h3 class="text-white mb-0">Urmatoarea programare</h3>
+      </div>
+      <div class="card-body">
+        <p class="mb-1">
+          <i class="fa fa-hospital-o mr-2"></i> <span>{{user.next_appointment.medical_center}}</span>
+        </p>
+        <p class="mb-1">
+          <i class="fa fa-location-arrow mr-2"></i> <span>{{user.next_appointment.city}}</span>
+        </p>
+        <p class="mb-1">
+          <i class="fa fa-map-pin mr-2"></i> <span>{{user.next_appointment.address}}</span>
+        </p>
+        <p class="mb-1">
+          <i class="fa fa-calendar-check-o mr-2"></i> <span>{{user.next_appointment.appointment_date | date: 'medium'}}</span>
+        </p>
+        <p class="mb-1">
+          <i class="fa fa-clock-o mr-2"></i> <span>{{user.next_appointment.appointment_time}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

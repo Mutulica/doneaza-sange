@@ -1,0 +1,49 @@
+
+<div *ngIf="hospital" class="container-fluid my-5">
+  <div class="row">
+    <div class="col-md-4" style="max-width: 350px">
+
+      <div class="card profile-card">
+        <div class="card-body px-0 pt-0">
+          <img class="img-fluid" *ngIf="hospital?.photoUrl" [src]="hospital?.photoUrl" [alt]="hospital.medical_center_name">
+          <div *ngIf="!hospital?.photoUrl" class="text-center my-3">
+            <i class="fa fa-hospital-o fa-5x"></i>
+          </div>
+          <div class="py-2 text-center">
+            <h3>{{hospital?.medical_center_name}}</h3>
+          </div>
+          <div class="list-group list-group-flush profile-usermenu">
+            <a routerLink="/hospital-panel/dashboard" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-home mr-2"></i>
+              Dashboard
+            </a>
+            <a routerLink="/hospital-panel/setari" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-user"></i>
+              Setari
+            </a>
+            <a routerLink="/hospital-panel/calendar" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-history"></i>
+              Calendar
+            </a>
+            <a routerLink="/hospital-panel/notificari" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-plus"></i>
+              Notificari
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-8">
+      <div class="h-100">
+        <div class="card-body">
+
+          <router-outlet></router-outlet>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

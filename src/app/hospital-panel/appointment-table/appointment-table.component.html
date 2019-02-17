@@ -1,0 +1,90 @@
+
+<form class="col-md-4">
+  <div class="form-group form-inline">
+    <label>Cautare: </label>
+    <input class="form-control ml-2" type="text" (keyup)="onSearchBox()" [formControl]="filter"/>
+  </div>
+</form>
+
+<table class="table table-responsive-sm table-hover no-footer">
+  <thead>
+  <tr>
+    <th>Nume</th>
+    <th>Telefon</th>
+    <th>Grupa</th>
+    <th>Data</th>
+    <th *ngIf="doNotDisplay.indexOf('status') < 0">Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let appointment of dataArray | paginate: { itemsPerPage: itemsPerPage, currentPage: curentPage }"
+      class="clickable" (click)="onViewAppointment(appointment); open(content)">
+    <td>{{appointment.firstName}} {{appointment.lastName}}</td>
+    <td>{{appointment?.phone}}</td>
+    <td>{{appointment?.blood_type}} {{appointment?.rh}}</td>
+    <td>{{appointment?.appointment_date | date: 'medium' : 'UTC'}}</td>
+    <td *ngIf="appointment.status !== 'pending'">
+      <span *ngIf="appointment.status === 'completed'" class="text-success">
+        <i class="fa fa-check mr-2"></i>
+        Prezent</span>
+      <span *ngIf="appointment.status === 'uncompleted'" class="text-danger">
+        <i class="fa fa-exclamation-triangle"></i>
+        Neprezentat
+      </span>
+    </td>
+    <td *ngIf="appointment.status === 'pending' && canConfirm">
+      <button (click)="onViewAppointment(appointment); open(content)" class="btn btn-sm btn-success">Confirma</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<!--Pagination-->
+<pagination-controls (pageChange)="curentPage = $event"
+                     previousLabel="Inapoi"
+                     nextLabel="Urmatoarea">
+</pagination-controls>
+
+<!--Appointment View-->
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detalii programare</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <p><strong>Nume:</strong> {{selectedAppointment.firstName}} {{selectedAppointment.lastName}} </p>
+      <p><strong>Telefon:</strong> {{selectedAppointment.phone}}</p>
+      <p><strong>Email:</strong> {{selectedAppointment.email}}</p>
+      <p><strong>Grupa Sanguina:</strong> {{selectedAppointment.blood_type}} {{selectedAppointment.rh}}</p>
+      <p><strong>Data si ora:</strong> {{selectedAppointment.appointment_date | date: 'medium' : 'UTC'}}</p>
+    </div>
+    <div *ngIf="selectedAppointment.status === 'pending' && canConfirm" class="w-100">
+      <h5>Confirmati daca sedinta de donare a fost efectuata</h5>
+      <form [formGroup]="statusForm" class="d-flex justify-content-center">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <div [ngClass]="statusForm.value.status === 'completed' ? 'btn-success' : 'btn-outline-success'" class="btn" type="button">DA</div>
+            <input hidden class="form-check-input" formControlName="status" type="radio" value="completed">
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <div [ngClass]="statusForm.value.status === 'uncompleted' ? 'btn-danger' : 'btn-outline-danger'" class="btn" type="button">NU</div>
+            <input hidden class="form-check-input"  formControlName="status" type="radio" value="uncompleted">
+          </label>
+        </div>
+      </form>
+
+      <ngb-alert *ngIf="statusResultError" [dismissible]="false">
+        <strong>Atentie!</strong> A intervenit o eroare. Va rugam incercati din nou.
+      </ngb-alert>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Inchide</button>
+    <button *ngIf="selectedAppointment.status === 'pending' && canConfirm" [disabled]="!statusForm.valid" type="button" class="btn btn-primary" (click)="onConfirmApp()">Salveaza</button>
+  </div>
+</ng-template>

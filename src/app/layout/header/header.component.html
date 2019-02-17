@@ -1,0 +1,131 @@
+
+<!--<mat-toolbar color="primary">-->
+  <!--<mat-toolbar-row>-->
+    <!--<span>Custom Toolbar</span>-->
+    <!--<button mat-button routerLink="/home" >Acasa</button>-->
+    <!--<button mat-button *ngIf="!isUserAuth" routerLink="/user">Inregistrare</button>-->
+    <!--<button mat-button routerLink="/useful-info">Informatii</button>-->
+
+    <!--<button mat-button *ngIf="!isUserAuth" routerLink="/user/user-login" >Login</button>-->
+    <!--<div *ngIf="isUserAuth" class="nav-right mb-0">-->
+      <!--<ul class="user-profile header-notification">-->
+        <!--<li ngbDropdown placement="bottom-right" id="dropdownBasic2" class="dropdown-primary d-inline-block">-->
+          <!--<div ngbDropdownToggle class="d-flex align-items-center">-->
+            <!--<i class="fa fa-user-circle-o fa-2x mr-2"></i>-->
+            <!--<span class="mr-2">{{isUserAuth.firstName}} {{isUserAuth.lastName}}</span>-->
+            <!--<i class="fa fa-angle-down"></i>-->
+          <!--</div>-->
+          <!--<div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="profile-notification ">-->
+            <!--<div class="list-group">-->
+              <!--<a class="list-group-item-action pl-4">-->
+                <!--&lt;!&ndash;<a href="#!" >&ndash;&gt;-->
+                <!--<i class="fa fa-cog"></i> Settings-->
+
+                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+              <!--</a>-->
+              <!--<a class="list-group-item-action pl-4">-->
+                <!--<i class="fa fa-user"></i> Profile-->
+
+              <!--</a>-->
+              <!--<a class="list-group-item-action pl-4">-->
+                <!--<i class="fa fa-envelope-o"></i> My Messages-->
+
+              <!--</a>-->
+              <!--<a (click)="authService.userSignOut()" class="list-group-item-action pl-4">-->
+                <!--<i class="fa fa-caret-square-o-left"></i> Logout-->
+
+              <!--</a>-->
+            <!--</div>-->
+          <!--</div>-->
+        <!--</li>-->
+      <!--</ul>-->
+    <!--</div>-->
+  <!--</mat-toolbar-row>-->
+<!--</mat-toolbar>-->
+<header>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div *ngIf="!isLoading" class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Acasa</a>
+        </li>
+        <li class="nav-item" *ngIf="!isUserAuth && !isHospitalAuth">
+          <a class="nav-link"  routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Inregistrare</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/useful-info" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Informatii</a>
+        </li>
+        <li *ngIf="!isUserAuth && !isHospitalAuth" class="nav-item">
+          <a class="nav-link" routerLink="/login/user-login" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Login</a>
+        </li>
+      </ul>
+
+      <div *ngIf="isUserAuth" class="nav-right mb-0">
+        <ul class="user-profile header-notification">
+          <li ngbDropdown placement="bottom-left" id="dropdownBasic1" class="dropdown-primary d-inline-block">
+            <div ngbDropdownToggle class="d-flex align-items-center">
+              <img *ngIf="isUserAuth.photoUrl" width="40px" height="auto" class="rounded-circle mr-2" [src]="isUserAuth.photoUrl" alt="Profile">
+              <i *ngIf="!isUserAuth.photoUrl" class="fa fa-user-circle-o fa-2x mr-2"></i>
+              <span class="mr-2">{{isUserAuth.firstName}} {{isUserAuth.lastName}}</span>
+              <i class="fa fa-angle-down"></i>
+            </div>
+
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="profile-notification ">
+              <div class="list-group">
+                <a class="list-group-item-action pl-4">
+                  <i class="fa fa-cog mr-2"></i> Settings
+                </a>
+                <a class="list-group-item-action pl-4" routerLink="/user-panel/dashboard">
+                  <i class="fa fa-user mr-2"></i> Profil
+                </a>
+                <a class="list-group-item-action pl-4">
+                  <i class="fa fa-envelope-o mr-2"></i> Notificari
+                </a>
+                <a (click)="authService.userSignOut()" class="list-group-item-action pl-4">
+                  <i class="fa fa-caret-square-o-left mr-2"></i> Logout
+                </a>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="isHospitalAuth" class="nav-right mb-0">
+        <ul class="user-profile header-notification">
+          <li ngbDropdown placement="bottom-left" id="dropdownBasic2" class="dropdown-primary d-inline-block">
+            <div ngbDropdownToggle class="d-flex align-items-center">
+              <img width="40px" height="auto" class="rounded-circle mr-2" *ngIf="isHospitalAuth.photoUrl" [src]="isHospitalAuth.photoUrl" alt="">
+              <i *ngIf="!isHospitalAuth.photoUrl" class="fa fa-user-circle-o fa-2x mr-2"></i>
+              <span class="mr-2">{{isHospitalAuth.medical_center_name}}</span>
+              <i class="fa fa-angle-down"></i>
+            </div>
+
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" class="profile-notification ">
+              <div class="list-group">
+                <a class="list-group-item-action pl-4" routerLink="/hospital-panel/setari">
+                  <i class="fa fa-cog mr-2"></i> Settings
+                </a>
+                <a class="list-group-item-action pl-4" routerLink="/hospital-panel/dashboard">
+                  <i class="fa fa-user mr-2"></i> Profil
+                </a>
+                <a class="list-group-item-action pl-4" routerLink="/hospital-panel/notificari">
+                  <i class="fa fa-envelope-o mr-2"></i> Notificari
+                </a>
+                <a (click)="authService.hospitalSignOut()" class="list-group-item-action pl-4">
+                  <i class="fa fa-caret-square-o-left mr-2"></i> Logout
+                </a>
+              </div>
+            </div>
+
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+</header>

@@ -1,0 +1,62 @@
+
+<div class="container-fluid my-5">
+  <div class="row">
+    <div class="col-md-4 mb-4">
+
+      <div class="card profile-card">
+        <div class="card-body px-0 pt-0">
+          <div class="text-center mb-3">
+            <img class="img-fluid" *ngIf="user && user.photoUrl" [src]="user?.photoUrl" alt="">
+            <div *ngIf="user && !user.photoUrl">
+              <img class="img-fluid" *ngIf="user.gender === 'M'" src="assets/img/profile/profile_male.jpg" alt="">
+              <img class="img-fluid" *ngIf="user.gender === 'F'" src="assets/img/profile/profile_female.jpg" alt="">
+              <div *ngIf="!user.gender" class="py-2">
+                <i class="fa fa-user-circle-o fa-4x"></i>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="user !== null" class="py-2 text-center">
+            <h3>{{user.firstName}} {{user.lastName}}</h3>
+          </div>
+          <div class="list-group list-group-flush profile-usermenu text-uppercase">
+            <a routerLink="/user-panel/dashboard" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-home mr-2"></i>
+              Dashboard
+            </a>
+            <a routerLink="/user-panel/user" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-user"></i>
+              Profilul Meu
+            </a>
+            <a routerLink="/user-panel/appointment" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-history"></i>
+              Programari
+            </a>
+            <a routerLink="/user-panel/appointment-add" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-plus"></i>
+              Adauga Programare
+            </a>
+            <a routerLink="/user-panel/alerts" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-envelope"></i>
+              Notificari
+            </a>
+            <a routerLink="/user-panel/hospitals" routerLinkActive="active" class="list-group-item list-group-item-action border-0">
+              <i class="fa fa-hospital-o"></i>
+              Centre de transfuzie
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-md-8">
+      <!--<div class="card profile-content h-100">-->
+        <!--<div class="card-body">-->
+          <!---->
+        <!--</div>-->
+      <!--</div>-->
+      <router-outlet></router-outlet>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<div *ngIf="!userActions.success || !userActions.error">
+  <div *ngIf="usersBookingService.user && usersBookingService.user?.canDonate" class="row my-3">
+    <!-- TODO: Create dynamic form -->
+    <div class="col-md-12 col-sm-12 col-12">
+      <div class="card">
+        <div class="card-header bg-primary">
+          <h3 class="card-title text-white mb-0">Adauga programare</h3>
+        </div>
+        <div *ngIf="!userActions.success" class="card-body mx-0">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <select (change)="onHospitalChange($event)" class="form-control">
+                    <option disabled>Selecteaza Centrul</option>
+                    <option
+                      *ngFor="let hospital of hospitals; let i = index"
+                      [hidden]="!hospital.isActive"
+                      [value]="i">{{hospital.medical_center_name}}</option>
+                  </select>
+                </div>
+
+                <div *ngIf="selectedHospital" class="form-group">
+                  <ngb-datepicker #dp  (select)="onChangeDate($event)" (navigate)="onChangeDate($event.next)"></ngb-datepicker>
+                </div>
+
+                <div *ngIf="selectedHospital" class="form-group">
+
+                  <select
+                    (change)="onSelectTime($event)"
+                    *ngIf="hospitalBookingHours && selectedHospital"
+                    class="form-control">
+                    <option>Selectati ora</option>
+                    <option *ngFor="let hours of hospitalBookingHours" [value]="hours">{{hours}}</option>
+                  </select>
+                  <p *ngIf="!hospitalBookingHours?.length && selectedHospital">Nu sunt ore disponibile. Va rugam selectati alta data</p>
+
+                </div>
+                <div *ngIf="selectedTime" class="form-group">
+                  <label>Doriti sa complectati formularul donatorului?</label><br>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline1" name="donorform" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline1">DA</label>
+                  </div>
+                  <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="customRadioInline2" name="donorform" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadioInline2">NU</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+
+                <div *ngIf="selectedHospital" class="card h-100">
+                  <div class="card-body">
+                    <h3 class="card-title text-white mb-0">{{selectedHospital.medical_center_name}}</h3>
+                    <p><strong>Oras:</strong> {{selectedHospital.city}}</p>
+                    <p><strong>Adresa:</strong> {{selectedHospital.address}}</p>
+                    <p><strong>Contact:</strong> </p>
+                    <p *ngIf="selectedDate"><strong>Data:</strong> {{ selectedDate | date: "fullDate"}}</p>
+                    <p *ngIf="selectedTime"><strong>Ora:</strong> {{selectedTime}}</p>
+                  </div>
+                  <div class="card-footer bg-white">
+                    <button [disabled]="!selectedTime || status.loading" (click)="onAddAppointment()" class="btn btn-success float-right">Adauga Programare</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="userActions.success || userActions.error" class="col-md-12 py-4">
+      <p>
+        <ngb-alert *ngIf="userActions.success" type="success">Programarea a fost facuta cu success</ngb-alert>
+      </p>
+      <p>
+        <ngb-alert *ngIf="userActions.error" type="danger">Programarea nu a putut fi facuta. <br> Va rugam incercat din nou</ngb-alert>
+      </p>
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="usersBookingService.user && !usersBookingService.user?.canDonate"  class="row my-5">
+  <div class="col-md-12 py-4">
+    <p>Pentru a putea dona va rugam sa va completati profilul</p>
+    <button routerLink="/user-panel/detalii-personale" class="btn btn-info">Actualizeaza-ti profilul.</button>
+  </div>
+</div>
+
+<app-donor-form [displayForm]="false"></app-donor-form>
+

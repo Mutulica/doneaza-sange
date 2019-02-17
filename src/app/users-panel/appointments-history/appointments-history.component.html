@@ -1,0 +1,53 @@
+<div class="card profile-card my-4">
+  <div class="card-header bg-primary">
+    <div class="font-size-17">
+      Istoric Programari
+    </div>
+  </div>
+  <div class="card-body px-0">
+    <div *ngIf="appointments && appointments.length > 0">
+      <table class="table table-responsive-sm table-hover no-footer">
+        <thead>
+        <tr>
+          <th>Centru</th>
+          <th>Data</th>
+          <th>Ora</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let appointment of appCollection">
+          <td>{{appointment.medical_center}}</td>
+          <td>{{appointment?.appointment_date | date: 'd MMMM, y' : 'UTC'}}</td>
+          <td>{{appointment?.appointment_time}}</td>
+          <td>
+            <span *ngIf="appointment.status === 'pending'" class="text-info">
+              <i class="fa fa-spinner fa-spin mr-2"></i>
+              in procesare</span>
+            <span *ngIf="appointment.status === 'completed'" class="text-success">
+              <i class="fa fa-check mr-2"></i>
+              Prezent</span>
+            <span *ngIf="appointment.status === 'uncompleted'" class="text-danger">
+              <i class="fa fa-exclamation-triangle"></i>
+              Neprezentat
+            </span>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+      <!--Pagination-->
+      <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+          <option [ngValue]="10" selected>10 rezultate</option>
+          <option [ngValue]="25">25 rezultate</option>
+          <option [ngValue]="50">50 rezultate</option>
+        </select>
+      </div>
+    </div>
+
+    <div *ngIf="appointments && appointments.length === 0" class="p-2">Nu exista nici o programare</div>
+  </div>
+</div>

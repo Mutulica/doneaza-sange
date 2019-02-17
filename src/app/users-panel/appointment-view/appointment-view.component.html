@@ -1,0 +1,24 @@
+
+<div class="card profile-card">
+  <div class="card-header bg-primary">
+    <div class="font-size-17">Urmatoarele programari</div>
+  </div>
+  <div class="card-body">
+    <div *ngIf="isUserLoaded" class="list-group">
+      <div *ngFor="let appointment of userAppointments">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{appointment.medical_center}}</h5>
+          <small>{{appointment.appointment_date | date: 'medium' : 'UTC'}}</small>
+        </div>
+        <p class="mb-1">{{appointment.city}}</p>
+        <small>{{appointment.address}}</small>
+        <div class="clearfix">
+          <button (click)="onDeleteApp(appointment)" class="btn btn-sm btn-outline-secondary pull-right">Anuleaza</button>
+        </div>
+        <hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-appointments-history *ngIf="isUserLoaded"></app-appointments-history>

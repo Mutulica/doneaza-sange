@@ -1,0 +1,197 @@
+#slider-area {
+  border-bottom: 2px solid rgb(236, 236, 236);
+  position: relative;
+}
+
+#slider-area .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+}
+
+#slider-area .sbanner {
+  position: relative;
+  background: url('../../../assets/img/banner/doctor.png') no-repeat;
+  background-position: bottom right;
+}
+
+#slider-area .slide-item {
+  position: relative;
+  width: 100%;
+  padding: 235px 0px 249px;
+  display: table;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#slider-area .slide-caption {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: left;
+  position: relative;
+  padding: 0px 15px;
+}
+
+#slider-area .slide-caption h1 {
+  font-size: 50px;
+  line-height: 65px;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  color: #00b28a;
+  margin-bottom: 15px;
+}
+
+#slider-area .slide-caption .slider-inner .caption-desc {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 30px;
+  color: #999999;
+}
+
+#slider-area .slide-caption p {
+  margin: 0 auto;
+  color: #e2e2e2;
+  font-size: 16px;
+  margin-top: 0;
+  text-transform: capitalize;
+}
+
+#slider-area .slide-caption .slider-inner .slide-btn {
+  margin-top: 36px;
+}
+
+#slider-area .slide-caption .slider-inner .slide-btn a {
+  margin-right: 20px;
+}
+
+#slider-area .mybtn {
+  width: 160px;
+  font-size: 16px;
+  font-weight: 600;
+  height: 50px;
+}
+
+.mybtn {
+  background-color: #00b28a;
+  width: 150px;
+  height: 50px;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: inline-block;
+  text-align: center;
+  line-height: 50px;
+  -webkit-transition: all .3s ease-in-out;
+  -moz-transition: all .3s ease-in-out;
+  transition: all .3s ease-in-out;
+}
+
+#slider-area .slide-caption .slider-inner .slide-btn a {
+  margin-right: 20px;
+}
+
+#slider-area a i {
+  display: inline-block;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #f66;
+  color: #f66;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 47px;
+  text-align: center;
+  position: relative;
+  top: 0px;
+  transition: .3s ease-in;
+}
+
+
+a, a:visited, a:focus, a:active, a:hover {
+  text-decoration: none;
+  outline: none;
+}
+
+
+@media (max-width: 1199.98px) {
+  #slider-area .slide-item {
+    padding: 240px 0 250px;
+  }
+
+  #slider-area .slide-caption .slider-inner {
+    max-width: 950px;
+  }
+
+  #slider-area .slide-caption .slider-inner .innerSize {
+    width: 100%;
+  }
+
+  #slider-area .slide-caption .slider-inner .caption-title {
+    color: #fff;
+  }
+  #slider-area .slide-caption h1 {
+    font-size: 40px;
+  }
+
+  #slider-area .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 991.98px) {
+  #slider-area .sbanner {
+    background-position: bottom center;
+  }
+
+  #slider-area .slide-caption .slider-inner .innerSize {
+    width: 100%;
+    text-align: center;
+  }
+
+  #slider-area .slide-item {
+    padding: 247px 0px 250px;
+    position: inherit;
+    z-index: 2;
+  }
+
+  #slider-area .overlay {
+    z-index: 1;
+  }
+}
+
+
+@media (max-width: 414px) {
+  #slider-area .slide-item {
+    padding: 135px 0px 150px;
+  }
+
+  #slider-area .slide-caption .slider-inner {
+    padding: 0px 0px;
+  }
+
+  #slider-area .slide-caption h1 {
+    line-height: 35px;
+    font-size: 25px;
+  }
+
+  #slider-area .slide-caption .slider-inner .innerSize {
+    width: 100%;
+    text-align: left;
+  }
+  #slider-area .slide-caption .slider-inner .caption-desc {
+    font-size: 16px;
+  }
+}

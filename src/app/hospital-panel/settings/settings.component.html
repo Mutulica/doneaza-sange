@@ -1,0 +1,181 @@
+<ngb-tabset>
+  <ngb-tab title="Detalii">
+    <ng-template ngbTabContent>
+
+      <div class="card profile-card my-4">
+        <div class="card-header bg-primary">
+          <div class="font-size-17">Detalii centru donare</div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+
+            <div class="col-md-4">
+              <img class="img-fluid" *ngIf="hospital?.photoUrl" [src]="hospital?.photoUrl" [alt]="hospital.medical_center_name">
+              <div *ngIf="!hospital?.photoUrl" class="text-center my-3">
+                <i class="fa fa-hospital-o fa-5x"></i>
+              </div>
+              <input #fileInput style="display: none;" type="file" (change)="imageUpload($event)" accept=".png,.jpg" />
+              <div class="w-100 text-center">
+                <button type="button" class="btn btn-link" (click)="fileInput.click()">Imagine profil</button>
+              </div>
+            </div>
+
+            <div class="col-md-8">
+              <form [formGroup]="detailsForm">
+                <div class="form-group">
+                  <label class="d-flex align-items-center">
+                    <i class="fa fa-user-circle-o fa-2x mr-3"></i>
+                    <span class="form-control border-0" *ngIf="!editForm">{{detailsForm.value.medical_center_name}}</span>
+                    <input *ngIf="editForm" type="text" formControlName="medical_center_name" placeholder="Numele centrului de donare" class="form-control">
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label class="d-flex align-items-center">
+                    <i class="fa fa-hospital-o fa-2x mr-3"></i>
+                    <span class="form-control border-0" *ngIf="!editForm">{{hospital?.city}}</span>
+                    <input *ngIf="editForm" type="text" formControlName="city" placeholder="Orasul" class="form-control">
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label class="d-flex align-items-center">
+                    <i class="fa fa-location-arrow fa-2x mr-3"></i>
+                    <span class="form-control border-0" *ngIf="!editForm">{{hospital?.address}}</span>
+                    <input *ngIf="editForm" type="text" formControlName="address" placeholder="Adresa" class="form-control">
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label class="d-flex align-items-center">
+                    <i class="fa fa-phone fa-2x mr-3"></i>
+                    <span class="form-control border-0" *ngIf="!editForm">{{hospital?.phone}}</span>
+                    <input *ngIf="editForm" type="text" formControlName="phone" placeholder="Telefon" class="form-control">
+                  </label>
+                </div>
+
+                <div class="form-group">
+                  <label class="d-flex align-items-center">
+                    <i class="fa fa-envelope fa-2x mr-3"></i>
+                    <span class="form-control border-0" *ngIf="!editForm">{{hospital?.email}}</span>
+                    <input *ngIf="editForm" type="text" formControlName="email" placeholder="Adresa de email" class="form-control">
+                  </label>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+        <div class="card-footer">
+          <div *ngIf="!editForm">
+            <button class="btn btn-outline-primary" (click)="onEditDetails()">Modifica</button>
+          </div>
+          <div *ngIf="editForm" class="float-right">
+            <button class="btn btn-outline-secondary mr-5" (click)="onCancelEdit()">Renunta</button>
+            <button [disabled]="detailsForm.invalid || detailsForm.pristine" class="btn btn-primary" (click)="onSaveDetails()">Salveaza</button>
+          </div>
+        </div>
+      </div>
+
+    </ng-template>
+  </ngb-tab>
+  <ngb-tab title="Orar">
+    <ng-template ngbTabContent>
+      <div class="card profile-card my-4">
+        <div class="card-header bg-primary">
+          <div class="font-size-17">Program de lucru</div>
+        </div>
+        <div class="card-body">
+          <div *ngIf="hospital.working_schedule?.monday" class="form-group">
+            <label class="d-flex align-items-center">
+              <strong>Luni:</strong>
+              <span class="form-control border-0">
+                {{hospital.working_schedule?.monday[0]}} - {{hospital?.working_schedule?.monday[hospital?.working_schedule?.monday.length -1]}}
+              </span>
+            </label>
+          </div>
+          <div *ngIf="hospital.working_schedule?.tuesday" class="form-group">
+            <label class="d-flex align-items-center">
+              <strong>Marti:</strong>
+              <span class="form-control border-0">
+                {{hospital.working_schedule?.tuesday[0]}} - {{hospital?.working_schedule?.tuesday[hospital?.working_schedule?.tuesday.length -1]}}
+              </span>
+            </label>
+          </div>
+          <div *ngIf="hospital.working_schedule?.wednesday" class="form-group">
+            <label class="d-flex align-items-center">
+              <strong>Miercuri:</strong>
+              <span class="form-control border-0">
+                {{hospital.working_schedule?.wednesday[0]}} - {{hospital?.working_schedule?.wednesday[hospital?.working_schedule?.wednesday.length -1]}}
+              </span>
+            </label>
+          </div>
+          <div *ngIf="hospital.working_schedule?.thursday" class="form-group">
+            <label class="d-flex align-items-center">
+              <strong>Joi:</strong>
+              <span class="form-control border-0">
+                {{hospital.working_schedule?.thursday[0]}} - {{hospital?.working_schedule?.thursday[hospital?.working_schedule?.thursday.length -1]}}
+              </span>
+            </label>
+          </div>
+          <div *ngIf="hospital.working_schedule?.friday" class="form-group">
+            <label class="d-flex align-items-center">
+              <strong>Vineri:</strong>
+              <span class="form-control border-0">
+                {{hospital.working_schedule?.friday[0]}} - {{hospital?.working_schedule?.friday[hospital?.working_schedule?.friday.length -1]}}
+              </span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="card profile-card my-4">
+        <div class="card-header bg-primary">
+          <div class="font-size-17">Editeaza Programul de lucru</div>
+        </div>
+
+        <div class="card-body">
+          <form [formGroup]="timeSchedule" class="my-4">
+            <div formArrayName="working_schedule">
+              <div *ngFor="let item of scheduleArray.controls; let i = index;" [formGroupName]="i" class="row clearfix">
+                <div class="form-group col-md-3 my-auto">
+                  <select class="form-control" formControlName="weekday">
+                    <option value="monday">Luni</option>
+                    <option value="tuesday">Marti</option>
+                    <option value="wednesday">Miercuri</option>
+                    <option value="thursday">Joi</option>
+                    <option value="friday">Vineri</option>
+                  </select>
+                </div>
+                <div class="col-md-3 mx-auto text-center">
+                  <ngb-timepicker formControlName="timeFrom" [hourStep]="hourStep" [minuteStep]="minuteStep"></ngb-timepicker>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                  <i class="fa fa-arrow-right my-auto"></i>
+                </div>
+                <div class="col-md-3">
+                  <ngb-timepicker formControlName="timeTo" [hourStep]="hourStep" [minuteStep]="minuteStep"></ngb-timepicker>
+                </div>
+
+                <div class="form-group col-md-2 my-auto">
+                  <button [ngClass]="i > 0 ? 'mb-2' : 'mb-0'" (click)="addDay()" class="btn btn-success"><i class="fa fa-plus-square-o"></i></button>
+                  <button *ngIf="i > 0" (click)="removeDay(i)" class="btn btn-danger"><i class="fa fa-minus-square-o"></i></button>
+                </div>
+                <div *ngIf="i > 0" class="col-md-12">
+                  <hr>
+                </div>
+
+              </div>
+
+            </div>
+          </form>
+        </div>
+
+        <div class="card-footer">
+          <button [disabled]="timeSchedule.invalid" (click)="onSaveSchedule()" class="btn btn-block btn-outline-primary">Salveaza</button>
+        </div>
+      </div>
+    </ng-template>
+  </ngb-tab>
+</ngb-tabset>
+

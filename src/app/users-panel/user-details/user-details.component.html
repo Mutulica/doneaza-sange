@@ -1,0 +1,191 @@
+<div class="card profile-card">
+  <div class="card-header bg-primary">
+    <div class="font-size-17">Detalii profil</div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4 text-center">
+        <img class="img-fluid mx-auto" [src]="user?.photoUrl ? user.photoUrl : 'assets/img/profile/profile_male.jpg'" alt="{{user?.firstName}} {{user?.lastName}}">
+        <input #fileInput style="display: none;" type="file" (change)="imageUpload($event)" accept=".png,.jpg" />
+        <div class="w-100 text-center">
+          <button type="button" class="btn btn-link" (click)="fileInput.click()">Imagine profil</button>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <!-- User Details -->
+        <ul class="list-group list-group-flush profile-list">
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Nume Prenume</strong>
+            <span class="ml-2 field-value">{{user?.firstName}} {{user?.lastName}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">E-mail</strong>
+            <span class="ml-2 field-value">{{user?.email}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Telefon</strong>
+            <span class="ml-2 field-value">{{user?.phone}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Sex</strong>
+            <span class="ml-2 field-value">{{user?.gender}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Data nasterii</strong>
+            <span class="ml-2 field-value">{{user?.dob | date: 'd MMMM, y'}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Grupa Sanguina</strong>
+            <span class="ml-2 field-value">{{user?.blood_type}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">RH</strong>
+            <span class="ml-2 field-value text-capitalize">{{user?.rh}}</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Notificare email</strong>
+            <span *ngIf="user?.email_notification" class="ml-2 field-value">Da</span>
+            <span *ngIf="!user?.email_notification" class="ml-2 field-value">Nu</span>
+          </li>
+          <li class="list-group-item border-0">
+            <strong class="field-title text-uppercase">Notificare SMS</strong>
+            <span *ngIf="user?.sms_notification" class="ml-2 field-value">Da</span>
+            <span *ngIf="!user?.sms_notification" class="ml-2 field-value">Nu</span>
+          </li>
+          <li class="list-group-item border-0">
+            <button (click)="open(content)" class="btn btn-outline-primary">Actualizeaza-ti profilul</button>
+          </li>
+        </ul>
+        <!-- / User Details -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Actualizare profil</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]='userForm'>
+      <div class="form-group">
+        <label for="firstName">Nume</label>
+        <input type="text" formControlName="firstName" id="firstName" class="form-control">
+        <p *ngIf="firstName.invalid">Numele nu este corect</p>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Prenume</label>
+        <input type="text" formControlName="lastName" id="lastName" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefon</label>
+        <input type="text" formControlName="phone" id="phone" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" formControlName="email" id="email" class="form-control">
+      </div>
+      <div class="form-group">
+        <label>Sex</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="gender"  value="M">
+          <label class="form-check-label" for="rh_pozitiv">
+            M
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="gender" value="F">
+          <label class="form-check-label" for="rh_negativ">
+            F
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-check-label">
+          Data nasterii
+        </label>
+        <div class="input-group">
+          <input class="form-control"
+                 ngbDatepicker
+                 formControlName="dob"
+                 #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-primary" (click)="d.toggle()" type="button">
+              <i class="fa fa-calendar"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!--  Blood Type  -->
+      <div class="form-group">
+        <label>Grupa Sanguina</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="blood_type" id="o1" value="O1">
+          <label class="form-check-label" for="o1">
+            O1
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="blood_type" id="a2" value="A2">
+          <label class="form-check-label" for="a2">
+            A2
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="blood_type" id="b3" value="B3">
+          <label class="form-check-label" for="b3">
+            B3
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="blood_type" id="ab4" value="AB4">
+          <label class="form-check-label" for="ab4">
+            AB4
+          </label>
+        </div>
+      </div>
+      <!--  / Blood Type  -->
+
+      <!--  RH  -->
+      <div class="form-group">
+        <label>RH</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="rh" id="rh_pozitiv" value="Pozitiv">
+          <label class="form-check-label" for="rh_pozitiv">
+            Pozitiv
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" formControlName="rh" id="rh_negativ" value="Negativ">
+          <label class="form-check-label" for="rh_negativ">
+            Negativ
+          </label>
+        </div>
+      </div>
+      <!--  / RH  -->
+
+      <div class="form-group">
+        <label>Doresc sa primesc notificari prin:</label><br>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" formControlName="email_notification" id="email_notification" value="email">
+          <label class="form-check-label" for="email_notification">Email</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" formControlName="sms_notification" id="sms_notification" value="sms">
+          <label class="form-check-label" for="sms_notification">SMS</label>
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button (click)="modal.close()" class="btn btn-outline-secondary text-uppercase">Inchide</button>
+    <button [disabled]="userForm.invalid || userForm.pristine"
+            type="button" class="btn btn-primary text-uppercase"
+            (click)="updateUserData()">Salveaza</button>
+  </div>
+</ng-template>

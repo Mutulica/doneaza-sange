@@ -1,0 +1,108 @@
+<div *ngIf="notifications" class="card profile-card">
+  <div class="card-header bg-primary">
+    <div class="fonst-size-17">
+      Urgente
+    </div>
+  </div>
+  <div class="card-body px-0">
+    <div class="row p-2">
+      <div class="col-md-12">
+        <h5>Filtreaza Notificarile</h5>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <select (change)="onHospitalSelect($event)" class="form-control">
+            <option value="all" selected>Toate</option>
+            <option
+              *ngFor="let hospital of hospitals"
+              [value]="hospital.uid">
+
+              {{hospital.medical_center_name}}
+
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <!--<div>-->
+          <!--<button-->
+            <!--*ngIf="!showAllNotifications"-->
+            <!--[disabled]="isLoading"-->
+            <!--(click)="this.showAllNotifications = !this.showAllNotifications"-->
+            <!--class="btn btn-outline-secondary">Toate notificarile</button>-->
+          <!--<button-->
+            <!--*ngIf="showAllNotifications"-->
+            <!--[disabled]="isLoading"-->
+            <!--(click)="this.showAllNotifications = !this.showAllNotifications;"-->
+            <!--class="btn btn-primary">Grupa mea</button>-->
+        <!--</div>-->
+      </div>
+      <!--<div *ngIf="selectedHospitalId !== 'all'" class="col-md-12">-->
+        <!--<div class="d-flex align-items-center py-1">-->
+          <!--<span class="mr-3">Doresc sa primesc notificari de la acest centru </span>-->
+          <!--<label class="switch mb-0" placement="top" [ngbTooltip]="!isInFavorite ? 'Adauga la favorite' : 'Elimina din favorite'">-->
+            <!--<input (change)="onSwitchChange(isInFavorite)" type="checkbox" [checked]="isInFavorite" [disabled]="isLoading">-->
+            <!--<span class="slider round"></span>-->
+          <!--</label>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+    <div *ngIf="notifications">
+      <table class="table table-responsive-sm table-hover no-footer">
+        <thead>
+        <tr>
+          <th>Centru</th>
+          <th>Data</th>
+          <th>Grupa</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let notification of notifications | paginate: { itemsPerPage: itemsPerPage, currentPage: curentPage }"
+            (click)="onViewNotification(notification)" class="clickable">
+          <td>{{notification?.hospital_center_name}}</td>
+          <td>{{notification?.date_created | date: 'medium' : 'UTC'}}</td>
+          <td>{{notification?.blood_type}} {{notification?.rh}}</td>
+        </tr>
+        </tbody>
+      </table>
+      <div *ngIf="!isLoading && !notifications || notifications.length === 0" class="col-md-12">
+        Nu sunt urgente
+      </div>
+
+      <!--Pagination-->
+      <pagination-controls
+        *ngIf="notifications.length > itemsPerPage"
+        (pageChange)="curentPage = $event"
+                           previousLabel="Inapoi"
+                           nextLabel="Urmatoarea">
+      </pagination-controls>
+    </div>
+
+  </div>
+</div>
+
+
+ <!-- Notitification view Modal -->
+<ng-template #content let-modal>
+  <div class="modal-header bg-primary">
+    <h4 class="modal-title text-white" id="modal-basic-title">{{selectedNotification.hospital_center_name}}</h4>
+    <button type="button" class="close text-white" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div>
+      <p>{{selectedNotification.title}}</p>
+      <p>{{selectedNotification.subject}}</p>
+      <p>{{selectedNotification.body}}</p>
+      <p>{{selectedNotification.blood_type}} {{selectedNotification.rh}}</p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="modal.close()">Inchide</button>
+    <button type="button" class="btn btn-outline-primary"
+            (click)="modal.close()"
+            routerLink="/user-panel/appointment-add">Doneaza</button>
+  </div>
+</ng-template>
+<!-- / Notitification view Modal -->

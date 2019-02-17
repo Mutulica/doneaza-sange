@@ -1,0 +1,53 @@
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  //color: #4f5f6f;
+  color: #666;
+  font-size: 15px;
+  background: $color_light;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #5d5d5d;
+}
+
+p {
+  color: #666;
+  font-size: 15px;
+}
+
+.profile-card {
+  box-shadow: 3px 4px 8px #c3c3c3;
+  border: 1px solid #ececec;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.bg-primary {
+  background: $color_primary !important;
+  color: #fff;
+}
+.bg-pink {
+  background-color: $color_pink !important;
+  color: #fff;
+}
+
+
+// Tabs
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+  color: #039be5;
+  background-color: transparent;
+  border-color: transparent;
+  border-bottom: 2px solid #039be5;
+  font-size: 17px;
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  font-size: 17px;
+  color: #999;
+}

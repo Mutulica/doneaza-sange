@@ -1,0 +1,17 @@
+<div class="card profile-card my-4">
+  <div class="card-header bg-primary">
+    <div class="font-size-17">
+      Urmatoarele Programari
+    </div>
+  </div>
+  <div class="card-body px-0">
+    <div>
+
+      <app-appointment-table *ngIf="appointments && appointments.length > 0" [dataList] = "appointments" [doNotDisplay]="doNotDisplay"></app-appointment-table>
+
+    </div>
+
+    <div *ngIf="appointments && appointments.length === 0" class="p-2">Nu exista nici o programare</div>
+  </div>
+</div>
+

@@ -1,0 +1,46 @@
+<form *ngIf="!passwordReset" [formGroup]="loginForm" class="form-signin">
+  <div class="form-group">
+    <input formControlName="email" type="text" placeholder="Email" class="form-control">
+  </div>
+  <div class="form-group">
+    <input formControlName="password" type="password" placeholder="Parola" class="form-control">
+  </div>
+  <div class="form-group mb-3 clearfix">
+    <button (click)="togglePassResetForm()" class="btn btn-link">Am uitat parola</button>
+    <button (click)="onEmailAndPassLogin()" type="button" class="btn btn-primary pull-right">Autentificare</button>
+  </div>
+  <hr class="my-4 clearfix">
+  <div class="form-group mt-3">
+    <button type="button" (click)="googleAuth()" class="btn btn-google btn-block text-uppercase">
+      <i class="fa fa-google mr-2"></i>
+      <span>
+        Autentificare prin Google
+      </span>
+    </button>
+  </div>
+</form>
+
+<div *ngIf="passwordReset">
+  <div class="pb-3">
+    <h5  class="mb-0">Resetare parola</h5>
+  </div>
+  <form [formGroup]="resetPassForm" (ngSubmit)="onResetPassword()">
+    <div class="form-group">
+      <input required type="email" formControlName="email" class="form-control" placeholder="Adresa de email">
+    </div>
+    <div class="form-group clearfix">
+      <button (click)="togglePassResetForm()" class="btn btn-outline-secondary btn-sm pull-left">Inapoi</button>
+      <button [disabled]="resetPassForm.invalid" type="submit" class="btn btn-primary btn-sm pull-right">Reseteaza</button>
+    </div>
+    <div class="w-100 clearfix">
+      <ngb-alert *ngIf="this.emailSentStatus === 'error'" type="danger">Solicitarea nu a fost trimisa.<br>
+        Va rugam verificati daca adresa de email este corecta.
+      </ngb-alert>
+    </div>
+  </form>
+  <div>
+    <ngb-alert *ngIf="this.emailSentStatus === 'success'" type="success">
+      Solicitarea a fost trimisa la adresa {{resetPassForm.value.email}}.
+    </ngb-alert>
+  </div>
+</div>

@@ -1,0 +1,426 @@
+<div *ngIf="displayForm" #donorForm class="col-md-12 bg-white py-5">
+  <div class="text-center">
+    <h4>CHESTIONAR PENTRU DONATORUL DE SANGE</h4>
+    <p>
+      <strong>
+        Convorbirea în cadrul consultaţiei medicale este acoperită de secretul medical.
+        Precauţiunile sunt luate în scopul securităţii medicale, atât pentru donator cât şi pentru
+        primitorul de sânge.
+      </strong>
+    </p>
+  </div>
+  <form #f="ngForm">
+
+    <table class="table table-bordered">
+      <thead>
+      <th></th>
+      <th></th>
+      </thead>
+      <tbody>
+      <tr>
+        <td>1. Consideraţi că aveţi o stare bună de sănătate?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline1" name="q1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline1">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline2" name="q1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline2">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr><td>În ultima vreme aţi avut: </td></tr>
+      <tr>
+        <td>
+          <ul>
+            <li>o pierdere în greutate neaşteptată,</li>
+            <li>febră neexplicabilă</li>
+            <li>tratament stomatologic, vaccinări </li>
+          </ul>
+
+        </td>
+        <td>
+          <ul class="p-0 list-unstyled">
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline3" name="q2" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline3">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline4" name="q2" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline4">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline5" name="q3" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline5">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline6" name="q3" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline6">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline7" name="q4" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline7">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline8" name="q4" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline8">NU</label>
+              </div>
+            </li>
+
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>2. Urmaţi vreun tratament medicamentos?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline9" name="q5" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline9">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline10" name="q5" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline10">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr> <td>3. În ultimele 12 luni aţi avut contact sexual cu:</td></tr>
+      <tr>
+        <td>
+          <ul>
+            <li>un partener cu hepatită sau HIV pozitiv</li>
+            <li>un partener ce se droghează prin injecţii</li>
+            <li>un partener care este plătit pentru sex</li>
+            <li>un partener cu hemofilie</li>
+            <li>parteneri multipli</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="p-0 list-unstyled">
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline11" name="q6" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline11">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline12" name="q6" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline12">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline13" name="q7" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline13">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline14" name="q7" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline14">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline15" name="q8" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline15">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline16" name="q8" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline16">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline17" name="q9" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline17">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline18" name="q9" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline18">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline19" name="q10" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline19">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline20" name="q10" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline20">NU</label>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>* V-aţi injectat vreodată droguri?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline21" name="q11" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline21">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline22" name="q11" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline22">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>* Aţi acceptat bani sau droguri pentru a întreţine relaţii sexuale?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline23" name="q12" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline23">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline24" name="q12" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline24">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="user.gender === 'M'">
+        <td>*pentru bărbaţi: aţi avut relaţii sexuale cu un alt bărbat?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline25" name="q13" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline25">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline26" name="q13" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline26">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr *ngIf="user.gender === 'F'">
+        <td>* pentru femei: a avut partenerul dumneavoastră relaţii sexuale cu un alt bărbat?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline27" name="q14" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline27">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline28" name="q14" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline28">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>* aţi schimbat partenerul (partenera) în ultimele 6 luni</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline29" name="q15" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline29">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline30" name="q15" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline30">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>De la ultima donare, sau în ultimele 12 luni aţi suferit:</td>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+            <li>o intervenţie chirurgicală sau investigaţii medicale?</li>
+            <li>tatuaje, acupunctură, găuri pentru cercei? </li>
+            <li>aţi fost transfuzat (a) ?</li>
+          </ul>
+          <ul *ngIf="user.gender === 'F'">
+            <li>data naşterii ultimului copil</li>
+            <li>data ultimei menstruaţii:</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="p-0 list-unstyled">
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline31" name="q16" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline31">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline32" name="q16" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline32">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline33" name="q17" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline33">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline34" name="q17" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline34">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline35" name="q18" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline35">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline36" name="q18" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline36">NU</label>
+              </div>
+            </li>
+          </ul>
+          <ul *ngIf="user.gender === 'F'" class="list-unstyled">
+            <li>
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="anul/luna/ziua" name="dp" ngbDatepicker  #lastchild="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="lastchild.toggle()" type="button">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="form-group">
+                <div class="input-group">
+                  <input class="form-control" placeholder="anul/luna/ziua" name="dp" ngbDatepicker  #lastPeriod="ngbDatepicker">
+                  <div class="input-group-append">
+                    <button class="btn btn-outline-secondary calendar" (click)="lastPeriod.toggle()" type="button">
+                      <i class="fa fa-calendar"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>5. V-aţi născut, aţi trăit sau călătorit în străinătate? </td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline37" name="q19" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline37">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline38" name="q19" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline38">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Unde?</td>
+        <td>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="Unde in strainatate">
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>6.Aţi fost în detenţie (INCHISOARE) în ultimul an?</td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline39" name="q20" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline39">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline40" name="q20" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline40">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          7. Aţi fost expuşi la hepatită(bolnavi în familie sau risc profesional)?
+        </td>
+        <td>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline41" name="q21" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline41">DA</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline42" name="q21" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline42">NU</label>
+          </div>
+        </td>
+      </tr>
+      <tr><td> Aţi suferit vreodată de:</td></tr>
+      <tr>
+        <td>
+          <ul>
+            <li>icter, tuberculoză, febră reumatică, malarie? </li>
+            <li>boli de inimă, tensiune arterială mare sau mică? </li>
+            <li>boli transmise sexual (hiv, sifilis etc)</li>
+            <li>accidente vasculare cardiace sau cerebrale?</li>
+            <li>convulsii, boli nervoase?</li>
+            <li>boli cronice (diabet, ulcer, cancer, astm) ?</li>
+            <li>*Sunteţi fumător?</li>
+            <li>*Aţi consumat alcool recent ?</li>
+            <li>*Ce băuturi aţi consumat?</li>
+            <li>*În ce cantitate?</li>
+          </ul>
+        </td>
+        <td>
+          <ul class="list-unstyled">
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline43" name="q22" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline43">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline44" name="q22" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline44">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline45" name="q23" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline45">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline46" name="q23" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline46">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline47" name="q24" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline47">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline48" name="q24" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline48">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline49" name="q25" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline49">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline50" name="q25" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline50">NU</label>
+              </div>
+            </li>
+            <li>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline51" name="q26" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline51">DA</label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline52" name="q26" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline52">NU</label>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+<div>
+  <button [disabled]="f.invalid" (click)="onSavePDF()" class="btn btn-primary">Save PDF</button>
+  <button (click)="checkForm(f)" class="btn btn-primary">check form</button>
+</div>
